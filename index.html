@@ -5,35 +5,85 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <!-- Materialize -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
     <title>Microwave Timer</title>
   </head>
-  <body class="photo">
-    <header>
-      <h1></h1>
-      <p></p>
-    </header>
-    <div>
-      <p id="timeDisplay">00:00</p>
+  <body>
+    <div class="container #80cbc4 teal lighten-3">
+      <header class="center-align">
+        <h1>Kitchen Microwave</h1>
+        <p>おいしいものを食べる</p>
+      </header>
+
+      <!-- Timer buttons/display -->
+      <section class="#e0f2f1 teal lighten-5 center-align">
+        <div class="row">
+          <p
+            id="timeDisplay"
+            class="#004d40 teal darken-4 #efebe9 brown-text text-lighten-5 col s6 offset-s3"
+          >
+            00:00
+          </p>
+        </div>
+
+        <div class="row center-align">
+          <p class="col s5 waves-effect waves-light btn offset-s1">Popcorn</p>
+          <p class="col s5 waves-effect waves-light btn">Set Timer</p>
+        </div>
+
+        <div class="row">
+          <div>
+            <button id="1" class="col s4 waves-effect waves-light btn">
+              1
+            </button>
+            <button id="2" class="col s4 waves-effect waves-light btn">
+              2
+            </button>
+            <button id="3" class="col s4 waves-effect waves-light btn">
+              3
+            </button>
+            <button id="4" class="col s4 waves-effect waves-light btn">
+              4
+            </button>
+            <button id="5" class="col s4 waves-effect waves-light btn">
+              5
+            </button>
+            <button id="6" class="col s4 waves-effect waves-light btn">
+              6
+            </button>
+            <button id="7" class="col s4 waves-effect waves-light btn">
+              7
+            </button>
+            <button id="8" class="col s4 waves-effect waves-light btn">
+              8
+            </button>
+            <button id="9" class="col s4 waves-effect waves-light btn">
+              9
+            </button>
+            <button id="start" class="col s4 waves-effect waves-light btn">
+              start
+            </button>
+            <button id="0" class="col s4 waves-effect waves-light btn">
+              0
+            </button>
+            <button id="stop" class="col s4 waves-effect waves-light btn">
+              stop
+            </button>
+            <button
+              id="clear"
+              class="col s4 waves-effect waves-light btn offset-s4"
+            >
+              clear
+            </button>
+          </div>
+        </div>
+        <br />
+      </section>
+      <br />
     </div>
-    <section>
-      <div>
-        <p>Popcorn</p>
-        <p>Set Timer</p>
-      </div>
-    </section>
-    <section>
-      <button id="1">1</button>
-      <button id="2">2</button>
-      <button id="3">3</button>
-      <button id="4">4</button>
-      <button id="5">5</button>
-      <button id="6">6</button>
-      <button id="7">7</button>
-      <button id="8">8</button>
-      <button id="9">9</button>
-      <button id="start">start</button>
-      <button id="0">0</button>
-      <button id="stop">stop</button>
-    </section>
   </body>
 </html>

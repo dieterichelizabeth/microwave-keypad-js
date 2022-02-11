@@ -1,5 +1,9 @@
-/* body {
-  background-image: url(../images/foodie.png);
-  background-repeat: no-repeat;
-  background-position: center;
-} */
+* {
+  margin: 10px;
+}
+
+#timeDisplay {
+  height: 50px;
+  font-size: 30px;
+  margin-top: 40px;
+}
