@@ -1,27 +1,27 @@
-/*
-Psuedocoding
-When the user clicks a button, that time begins on the clock
-console "brrrrr" (microwave started)
-console wattage
-when the timer ends- display 00:00
-console "ding" (food is ready)
+// When the user clicks a button, the timer starts based on that #
 
-When the user clicks popcorn
-watage and time are run
-when the wattage changes, it is consoled
-pop will console in the log
-ding will console when complete
+//stop button
+var stopEl = document.getElementById('stop');
 
-When the user clicks set timer- they can enter 4 #'s.
-those #'s are pushed into an array, and run at their value
+var timeAtStart = 10
+let time = timeAtStart * 60;
 
-when the user clicks stop, the timer is paused
+var microwaveTimerEl = document.getElementById('timeDisplay');
+setInterval(beginMicrowave, 1000);
 
-when the user clicks clear, the timer is cleared to 00:00
+function beginMicrowave () {
+    // convert the time to mins/secconds
+    var mins = Math.floor(time / 60);
+    // add placeholder "0" for format
+    if (mins<10) {
+        mins = '0' + mins;
+    }
+    let secs = time % 60;
+    // add placeholder "0" for format
+    if (secs<10) {
+        secs = '0' + secs;
+    }
 
-when the user decides to add more time, if the timer is counting
-down, they can press one of the buttons
-that amount of time will be added to the clock (up to 20 minutes)
-if the user attempts to enter more than 20 minutes
-an alert is presented ("you don't want to do that lol")
-*/
+    microwaveTimerEl.innerHTML = mins + ":" + secs;
+    time --;
+}
