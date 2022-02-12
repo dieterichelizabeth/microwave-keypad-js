@@ -53,8 +53,6 @@ function timeSelected () {
 
        microwaveTimerEl.innerHTML = mins + ":" + secs;
        time --;
-       console.log(beginMicrowave);
-       console.log(time);
         }, 1000);
     }
     else {
@@ -64,6 +62,9 @@ function timeSelected () {
     }
    }
    else if (time ==  0) {
+    // stop countdown
+    clearInterval(beginMicrowave);
+    // display time
     microwaveTimerEl.innerHTML = "00:00";
    }
 }
