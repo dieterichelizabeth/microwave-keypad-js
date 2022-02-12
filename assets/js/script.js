@@ -18,6 +18,13 @@ stopEl.addEventListener('click', function(){
     startEl.removeAttribute('disabled');
 });
 
+// clear button
+var clearEl = document.getElementById('clear');
+clearEl.addEventListener('click', function(){
+    console.log("clear!");
+    time = 0;
+    timeSelected(time);
+})
 
 // right now, timer set to 10 minutes
 var timeAtStart = 10
@@ -29,7 +36,7 @@ var microwaveTimerEl = document.getElementById('timeDisplay');
 
 
 function timeSelected () {
-   
+   if (time > 0) {
     if (beginMicrowave == -1) {
         beginMicrowave =  setInterval(function(){
        // convert the time to mins/secconds
@@ -55,4 +62,8 @@ function timeSelected () {
         console.log(beginMicrowave);
         beginMicrowave = -1;
     }
+   }
+   else if (time ==  0) {
+    microwaveTimerEl.innerHTML = "00:00";
+   }
 }
