@@ -1,12 +1,21 @@
-// When the user clicks a button, the timer starts based on that #
+// Complete:
+// When the user clicks start- the timer starts the countdown function
+// When the user clicks stop- the countdown pauses
+// When the user clicks start again, the countdown resumes
+// When the user clicks clear- the timer clears and countdown ends
+
+// To-do:
+// When the user clicks any number button, the countdown will begin from that number
+// When the user clicks any number button during countdown, the countdown increases by that #
+// When the user clicks "set timer", they are able to click up to four buttons to add time, then click start to begin countdown
+
 // timer display element
 var microwaveTimerEl = document.getElementById("timeDisplay");
 
 // start button -- use function format for # buttons
 var startEl = document.getElementById("start");
 startEl.addEventListener("click", function () {
-  console.log("start!");
-  console.log(time);
+  //   console.log("start!");
   timeSelected();
   startEl.disabled = true;
   stopEl.removeAttribute("disabled");
@@ -15,11 +24,10 @@ startEl.addEventListener("click", function () {
 // stop button
 var stopEl = document.getElementById("stop");
 stopEl.addEventListener("click", function () {
-  console.log("stop!");
+  //   console.log("stop!");
   timeSelected();
   stopEl.disabled = true;
   startEl.removeAttribute("disabled");
-  console.log(time);
 });
 
 // clear button
@@ -61,16 +69,19 @@ function timeSelected() {
       }, 1000);
     } else {
       // stops the timer (when stop is clicked)
+
       clearInterval(beginMicrowave);
       beginMicrowave = -1;
     }
   } else if (time == 0) {
-    // resets the timer (when clear is clicked)
+    // (when clear is clicked)
+
     // stop countdown
     clearInterval(beginMicrowave);
     // display time
     microwaveTimerEl.innerHTML = "00:00";
 
+    // reset the time variable
     time = timeAtStart * 60;
   }
 }
