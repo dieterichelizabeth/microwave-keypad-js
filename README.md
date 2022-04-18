@@ -1,2 +1,3 @@
 # microwave-keypad-js
-A timer function based on microwaves ⌛️⏳
+
+Time studies based on Microwaves ⌛️⏳

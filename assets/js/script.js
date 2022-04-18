@@ -1,14 +1,3 @@
-// Complete:
-// When the user clicks start- the timer starts the countdown function
-// When the user clicks stop- the countdown pauses
-// When the user clicks start again, the countdown resumes
-// When the user clicks clear- the timer clears and countdown ends
-
-// To-do:
-// When the user clicks any number button, the countdown will begin from that number
-// When the user clicks any number button during countdown, the countdown increases by that #
-// When the user clicks "set timer", they are able to click up to four buttons to add time, then click start to begin countdown
-
 // timer display element
 var microwaveTimerEl = document.getElementById("timeDisplay");
 
