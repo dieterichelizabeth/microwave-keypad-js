@@ -30,7 +30,7 @@ function updateTimer(minutes) {
   }
 }
 
-function timeSelected(time) {
+function timeSelected() {
   // get the start time from the timeDisplay HTML
   var timeAtStart = parseInt(
     document
