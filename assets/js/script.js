@@ -5,8 +5,14 @@ const Clock = {
   sec: 0,
   time: 0,
   addTime: function (num) {
-    this.time = this.time + num;
-    this.formatAndDisplay();
+    if (this.time + num < 1800) {
+      this.time = this.time + num;
+      this.formatAndDisplay();
+    } else {
+      this.time = 1800;
+      this.formatAndDisplay();
+      console.log("disable buttons");
+    }
   },
   clear: function () {
     this.time = 0;
