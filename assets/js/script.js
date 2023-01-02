@@ -22,6 +22,12 @@ const Clock = {
     // Display the time
     $("#timeDisplay").text(`${this.mins}:${this.sec}`);
   },
+  pause: function () {
+    this.isPaused = true;
+  },
+  unpause: function () {
+    this.isPaused = false;
+  },
 };
 
 // Countdown timer function :)
@@ -84,13 +90,15 @@ $("#9").click(function () {
 });
 
 $("#start").click(function () {
+  Clock.unpause();
   start();
 });
 
 $("#pause").click(function () {
-  console.log("pause clock");
+  Clock.pause();
 });
 
 $("#clear").click(function () {
+  Clock.pause();
   console.log("clear clock");
 });
