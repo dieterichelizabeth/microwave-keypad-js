@@ -4,48 +4,51 @@ const Clock = {
   mins: 0,
   sec: 0,
   time: 0,
+  addTime: function (num) {
+    this.time = this.time + num;
+  },
 };
 
 // Element Listeners -------
 
 $("#30").click(function () {
-  console.log(this);
+  Clock.addTime(30);
 });
 
 $("#1").click(function () {
-  console.log(this);
+  Clock.addTime(60);
 });
 
 $("#2").click(function () {
-  console.log(this);
+  Clock.addTime(120);
 });
 
 $("#3").click(function () {
-  console.log(this);
+  Clock.addTime(180);
 });
 
 $("#4").click(function () {
-  console.log(this);
+  Clock.addTime(240);
 });
 
 $("#5").click(function () {
-  console.log(this);
+  Clock.addTime(300);
 });
 
 $("#6").click(function () {
-  console.log(this);
+  Clock.addTime(360);
 });
 
 $("#7").click(function () {
-  console.log(this);
+  Clock.addTime(420);
 });
 
 $("#8").click(function () {
-  console.log(this);
+  Clock.addTime(480);
 });
 
 $("#9").click(function () {
-  console.log(this);
+  Clock.addTime(540);
 });
 
 $("#start").click(function () {
