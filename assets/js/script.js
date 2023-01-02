@@ -6,7 +6,39 @@ const Clock = {
   time: 0,
   addTime: function (num) {
     this.time = this.time + num;
+    this.formatAndDisplay();
   },
+  formatAndDisplay: function () {
+    // convert the time to mins/secconds
+    this.mins = Math.floor(this.time / 60);
+    this.sec = this.time % 60;
+    // add placeholder "0" for format
+    if (this.mins < 10) {
+      this.mins = "0" + this.mins;
+    }
+    if (this.sec < 10) {
+      this.sec = "0" + this.sec;
+    }
+    // Display the time
+    $("#timeDisplay").text(`${this.mins}:${this.sec}`);
+  },
+};
+
+// Countdown timer function :)
+const start = () => {
+  let runClock = setInterval(timer, 1000);
+
+  function timer() {
+    if (Clock.isPaused === false) {
+      Clock.time--;
+      Clock.formatAndDisplay();
+      if (Clock.time === 0) {
+        clearInterval(runClock);
+      }
+    } else {
+      clearInterval(runClock);
+    }
+  }
 };
 
 // Element Listeners -------
@@ -52,7 +84,7 @@ $("#9").click(function () {
 });
 
 $("#start").click(function () {
-  console.log("start clock");
+  start();
 });
 
 $("#pause").click(function () {
