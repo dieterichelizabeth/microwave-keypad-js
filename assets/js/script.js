@@ -66,13 +66,13 @@ const start = () => {
   }
 };
 
-// const disable = (el) => {
-//   $(el).attr("disabled", "true");
-// };
+const disable = (el) => {
+  $(el).attr("disabled", "true");
+};
 
-// const enable = (el) => {
-//   $(el).attr("disabled", "false");
-// };
+const enable = (el) => {
+  $(el).removeAttr("disabled");
+};
 
 // Display the current time
 const currentTime = () => {
@@ -119,6 +119,8 @@ $(".num").click(function () {
   if (num !== 30) {
     num = num * 60;
   }
+  enable("#start");
+  enable("#pause");
   Clock.addTime(num);
 });
 
@@ -136,8 +138,11 @@ $("#clear").click(function () {
   Clock.pause();
   Clock.clear();
   Clock.stop();
+  disable("#start");
+  disable("#pause");
 });
 
 currentTime();
-// disable("#start");
-// disable("#pause");
+disable("#start");
+disable("#pause");
+disable("#0");
