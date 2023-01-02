@@ -8,6 +8,10 @@ const Clock = {
     this.time = this.time + num;
     this.formatAndDisplay();
   },
+  clear: function () {
+    this.time = 0;
+    this.formatAndDisplay();
+  },
   formatAndDisplay: function () {
     // convert the time to mins/secconds
     this.mins = Math.floor(this.time / 60);
@@ -100,5 +104,5 @@ $("#pause").click(function () {
 
 $("#clear").click(function () {
   Clock.pause();
-  console.log("clear clock");
+  Clock.clear();
 });
