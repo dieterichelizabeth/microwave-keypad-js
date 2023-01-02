@@ -6,7 +6,6 @@ const Clock = {
   sec: 0,
   time: 0,
   addTime: function (num) {
-    console.log(this.time);
     if (this.time + num < 1800) {
       this.time = this.time + num;
       this.formatAndDisplay();
@@ -67,6 +66,14 @@ const start = () => {
   }
 };
 
+// const disable = (el) => {
+//   $(el).attr("disabled", "true");
+// };
+
+// const enable = (el) => {
+//   $(el).attr("disabled", "false");
+// };
+
 // Display the current time
 const currentTime = () => {
   timer();
@@ -106,56 +113,13 @@ const timesUp = () => {
   }
 };
 
-// const disable = (el) => {
-//   $(el).attr("disabled", "true");
-// };
-// const enable = (el) => {
-//   $(el).attr("disabled", "false");
-// };
-
-// disable("#start");
-// disable("#pause");
-
 // Element Listeners -------
-
-$("#30").click(function () {
-  Clock.addTime(30);
-});
-
-$("#1").click(function () {
-  Clock.addTime(60);
-});
-
-$("#2").click(function () {
-  Clock.addTime(120);
-});
-
-$("#3").click(function () {
-  Clock.addTime(180);
-});
-
-$("#4").click(function () {
-  Clock.addTime(240);
-});
-
-$("#5").click(function () {
-  Clock.addTime(300);
-});
-
-$("#6").click(function () {
-  Clock.addTime(360);
-});
-
-$("#7").click(function () {
-  Clock.addTime(420);
-});
-
-$("#8").click(function () {
-  Clock.addTime(480);
-});
-
-$("#9").click(function () {
-  Clock.addTime(540);
+$(".num").click(function () {
+  let num = parseInt(this.id);
+  if (num !== 30) {
+    num = num * 60;
+  }
+  Clock.addTime(num);
 });
 
 $("#start").click(function () {
@@ -175,3 +139,5 @@ $("#clear").click(function () {
 });
 
 currentTime();
+// disable("#start");
+// disable("#pause");
