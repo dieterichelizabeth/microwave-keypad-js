@@ -68,6 +68,23 @@ const timesUp = () => {
   }
 };
 
+// Display the current time
+const currentTime = () => {
+  let current = setInterval(timer, 30000);
+
+  function timer() {
+    let hour = dayjs().format("HH");
+    let minute = dayjs().format("mm");
+
+    if (parseInt(hour) > 10) {
+      hour = hour - 12;
+    } else if (parseInt(hour) === 00) {
+      hour = 12;
+    }
+    $("#timeDisplay").text(`${hour}:${minute}`);
+  }
+};
+
 // Element Listeners -------
 
 $("#30").click(function () {
@@ -123,3 +140,5 @@ $("#clear").click(function () {
   Clock.pause();
   Clock.clear();
 });
+
+currentTime();
