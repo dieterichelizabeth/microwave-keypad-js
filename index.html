@@ -5,86 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <!-- Materialize -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
-    <!-- Google Fonts -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Rubik"
-    />
-    <title>Microwave Timer</title>
+    <!-- Jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <title>Microwave Clock</title>
   </head>
   <body>
-    <div class="container #80cbc4 teal lighten-3">
-      <header class="center-align">
-        <h1>Kitchen Microwave</h1>
-        <p>おいしいものを食べる</p>
+    <div class="background">
+      <header>
+        <div class="clock">
+          <h1 id="timeDisplay">00:00</h1>
+        </div>
+        <p>Microwave Clock</p>
       </header>
 
-      <!-- Timer buttons/display -->
-      <section class="#e0f2f1 teal lighten-5 center-align">
-        <div class="row">
-          <p
-            id="timeDisplay"
-            class="#004d40 teal darken-4 #efebe9 brown-text text-lighten-5 col s6 offset-s3"
-          >
-            00:00
-          </p>
-        </div>
+      <main class="grid1X3">
+        <button id="1" class="btn num">1</button>
+        <button id="2" class="btn num">2</button>
+        <button id="3" class="btn num">3</button>
+        <button id="4" class="btn num">4</button>
+        <button id="5" class="btn num">5</button>
+        <button id="6" class="btn num">6</button>
+        <button id="7" class="btn num">7</button>
+        <button id="8" class="btn num">8</button>
+        <button id="9" class="btn num">9</button>
+        <div></div>
+        <button id="0" class="btn num">0</button>
+        <button id="30" class="btn num">30 secconds</button>
+      </main>
 
-        <div class="row">
-          <div>
-            <button id="1" class="col s4 waves-effect waves-light btn">
-              1
-            </button>
-            <button id="2" class="col s4 waves-effect waves-light btn">
-              2
-            </button>
-            <button id="3" class="col s4 waves-effect waves-light btn">
-              3
-            </button>
-            <button id="4" class="col s4 waves-effect waves-light btn">
-              4
-            </button>
-            <button id="5" class="col s4 waves-effect waves-light btn">
-              5
-            </button>
-            <button id="6" class="col s4 waves-effect waves-light btn">
-              6
-            </button>
-            <button id="7" class="col s4 waves-effect waves-light btn">
-              7
-            </button>
-            <button id="8" class="col s4 waves-effect waves-light btn">
-              8
-            </button>
-            <button id="9" class="col s4 waves-effect waves-light btn">
-              9
-            </button>
-            <button id="start" class="col s4 waves-effect waves-light btn">
-              start
-            </button>
-            <button id="0" class="col s4 waves-effect waves-light btn">
-              0
-            </button>
-            <button id="stop" class="col s4 waves-effect waves-light btn">
-              stop
-            </button>
-            <button
-              id="clear"
-              class="col s4 waves-effect waves-light btn offset-s4"
-            >
-              clear
-            </button>
-          </div>
-        </div>
-        <br />
-      </section>
-      <br />
+      <aside class="grid1X3">
+        <button id="start" class="btn">start</button>
+        <button id="clear" class="btn">clear</button>
+        <button id="pause" class="btn">pause</button>
+      </aside>
     </div>
+
+    <!-- Days.js -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
