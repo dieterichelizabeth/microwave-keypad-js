@@ -44,9 +44,26 @@ const start = () => {
       Clock.formatAndDisplay();
       if (Clock.time === 0) {
         clearInterval(runClock);
+        timesUp();
       }
     } else {
       clearInterval(runClock);
+    }
+  }
+};
+
+// Food is done!
+const timesUp = () => {
+  let message = setInterval(timer, 1000);
+  let index = 0;
+
+  function timer() {
+    if (index < 3) {
+      const messageArr = ["Food", "Is", "Ready"];
+      $("#timeDisplay").text(messageArr[index]);
+      index++;
+    } else {
+      clearInterval(message);
     }
   }
 };
