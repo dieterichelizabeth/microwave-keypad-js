@@ -1,10 +1,12 @@
 // Clock Object :)
 const Clock = {
   isPaused: false,
+  isRunning: false,
   mins: 0,
   sec: 0,
   time: 0,
   addTime: function (num) {
+    console.log(this.time);
     if (this.time + num < 1800) {
       this.time = this.time + num;
       this.formatAndDisplay();
@@ -38,6 +40,13 @@ const Clock = {
   unpause: function () {
     this.isPaused = false;
   },
+  start: function () {
+    this.isRunning = true;
+  },
+  stop: function () {
+    this.isRunning = false;
+    currentTime();
+  },
 };
 
 // Countdown timer function :)
@@ -58,6 +67,29 @@ const start = () => {
   }
 };
 
+// Display the current time
+const currentTime = () => {
+  timer();
+  let current = setInterval(timer, 30000);
+
+  // Stop the current time from displaying if the clock is running
+  function timer() {
+    if (Clock.isRunning) {
+      clearInterval(current);
+    } else {
+      let hour = dayjs().format("HH");
+      let minute = dayjs().format("mm");
+
+      if (parseInt(hour) > 10) {
+        hour = hour - 12;
+      } else if (parseInt(hour) === 00) {
+        hour = 12;
+      }
+      $("#timeDisplay").text(`${hour}:${minute}`);
+    }
+  }
+};
+
 // Food is done!
 const timesUp = () => {
   let message = setInterval(timer, 1000);
@@ -74,22 +106,15 @@ const timesUp = () => {
   }
 };
 
-// Display the current time
-const currentTime = () => {
-  let current = setInterval(timer, 30000);
+// const disable = (el) => {
+//   $(el).attr("disabled", "true");
+// };
+// const enable = (el) => {
+//   $(el).attr("disabled", "false");
+// };
 
-  function timer() {
-    let hour = dayjs().format("HH");
-    let minute = dayjs().format("mm");
-
-    if (parseInt(hour) > 10) {
-      hour = hour - 12;
-    } else if (parseInt(hour) === 00) {
-      hour = 12;
-    }
-    $("#timeDisplay").text(`${hour}:${minute}`);
-  }
-};
+// disable("#start");
+// disable("#pause");
 
 // Element Listeners -------
 
@@ -135,6 +160,7 @@ $("#9").click(function () {
 
 $("#start").click(function () {
   Clock.unpause();
+  Clock.start();
   start();
 });
 
@@ -145,6 +171,7 @@ $("#pause").click(function () {
 $("#clear").click(function () {
   Clock.pause();
   Clock.clear();
+  Clock.stop();
 });
 
 currentTime();
