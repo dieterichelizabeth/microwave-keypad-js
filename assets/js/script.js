@@ -1,11 +1,11 @@
 // Clock Object :)
 const Clock = {
-  isPaused: false,
-  isRunning: false,
+  state: "off", // State can be "off", "paused", or "running"
   mins: 0,
   sec: 0,
   time: 0,
   addTime: function (num) {
+    // Prevent Time from going over 30 minutes
     if (this.time + num < 1800) {
       this.time = this.time + num;
       this.formatAndDisplay();
@@ -14,10 +14,6 @@ const Clock = {
       this.formatAndDisplay();
       console.log("disable buttons");
     }
-  },
-  clear: function () {
-    this.time = 0;
-    this.formatAndDisplay();
   },
   formatAndDisplay: function () {
     // convert the time to mins/secconds
@@ -33,19 +29,21 @@ const Clock = {
     // Display the time
     $("#timeDisplay").text(`${this.mins}:${this.sec}`);
   },
-  pause: function () {
-    this.isPaused = true;
+  updateState: function (param) {
+    if (param === "off") {
+      this.time = 0;
+      this.state = param;
+    } else {
+      this.state = param;
+    }
   },
-  unpause: function () {
-    this.isPaused = false;
-  },
-  start: function () {
-    this.isRunning = true;
-  },
-  stop: function () {
-    this.isRunning = false;
-    currentTime();
-  },
+};
+
+const reset = () => {
+  currentTime();
+  $("#start").attr("disabled", "true");
+  $("#pause").attr("disabled", "true");
+  $("#0").attr("disabled", "true");
 };
 
 // Countdown timer function :)
@@ -53,7 +51,7 @@ const start = () => {
   let runClock = setInterval(timer, 1000);
 
   function timer() {
-    if (Clock.isPaused === false) {
+    if (Clock.state === "running") {
       Clock.time--;
       Clock.formatAndDisplay();
       if (Clock.time === 0) {
@@ -66,14 +64,6 @@ const start = () => {
   }
 };
 
-const disable = (el) => {
-  $(el).attr("disabled", "true");
-};
-
-const enable = (el) => {
-  $(el).removeAttr("disabled");
-};
-
 // Display the current time
 const currentTime = () => {
   timer();
@@ -81,7 +71,7 @@ const currentTime = () => {
 
   // Stop the current time from displaying if the clock is running
   function timer() {
-    if (Clock.isRunning) {
+    if (Clock.state === "running") {
       clearInterval(current);
     } else {
       let hour = dayjs().format("HH");
@@ -119,30 +109,23 @@ $(".num").click(function () {
   if (num !== 30) {
     num = num * 60;
   }
-  enable("#start");
-  enable("#pause");
+  $("#start").removeAttr("disabled");
+  $("#pause").removeAttr("disabled");
   Clock.addTime(num);
 });
 
 $("#start").click(function () {
-  Clock.unpause();
-  Clock.start();
+  Clock.updateState("running");
   start();
 });
 
 $("#pause").click(function () {
-  Clock.pause();
+  Clock.updateState("paused");
 });
 
 $("#clear").click(function () {
-  Clock.pause();
-  Clock.clear();
-  Clock.stop();
-  disable("#start");
-  disable("#pause");
+  Clock.updateState("off");
+  reset();
 });
 
-currentTime();
-disable("#start");
-disable("#pause");
-disable("#0");
+reset();
