@@ -39,13 +39,6 @@ const Clock = {
   },
 };
 
-const reset = () => {
-  currentTime();
-  $("#start").attr("disabled", "true");
-  $("#pause").attr("disabled", "true");
-  $("#0").attr("disabled", "true");
-};
-
 // Countdown timer function :)
 const start = () => {
   let runClock = setInterval(timer, 1000);
@@ -103,18 +96,60 @@ const timesUp = () => {
   }
 };
 
+const enable = (btns) => {
+  btns.forEach((btn) => $(btn).removeAttr("disabled"));
+};
+
+const disable = (btns) => {
+  btns.forEach((btn) => $(btn).attr("disabled", "true"));
+};
+
+const btnHandler = (param) => {
+  switch (param) {
+    case "clockStart":
+      enable(["#start", "#pause"]);
+      disable(["#popcorn", "#potato", "#timer"]);
+      break;
+    case "clockStop":
+      disable(["#start", "#pause", "#0"]);
+      enable(["#popcorn", "#potato", "#timer"]);
+      break;
+    default:
+      return;
+  }
+};
+
+const reset = () => {
+  currentTime();
+  btnHandler("clockStop");
+};
+
 // Element Listeners -------
 $(".num").click(function () {
   let num = parseInt(this.id);
   if (num !== 30) {
     num = num * 60;
   }
-  $("#start").removeAttr("disabled");
-  $("#pause").removeAttr("disabled");
+  btnHandler("clockStart");
   Clock.addTime(num);
 });
 
+$("#popcorn").click(function () {
+  Clock.addTime(150);
+  btnHandler("clockStart");
+  Clock.updateState("running");
+  start();
+});
+
+$("#potato").click(function () {
+  Clock.addTime(420);
+  btnHandler("clockStart");
+  Clock.updateState("running");
+  start();
+});
+
 $("#start").click(function () {
+  btnHandler("clockStart");
   Clock.updateState("running");
   start();
 });
