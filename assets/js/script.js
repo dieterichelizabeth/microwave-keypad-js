@@ -1,9 +1,11 @@
 // Clock Object :)
 const Clock = {
   state: "off", // State can be "off", "paused", or "running"
+  timerIsOn: false,
   mins: 0,
   sec: 0,
   time: 0,
+  timer: [0, 0, 0, 0], // 00:00
   addTime: function (num) {
     // Prevent Time from going over 30 minutes
     if (this.time + num < 1800) {
@@ -12,8 +14,11 @@ const Clock = {
     } else {
       this.time = 1800;
       this.formatAndDisplay();
-      console.log("disable buttons");
     }
+  },
+  clearTimer: function () {
+    this.timerIsOn = !this.timerIsOn;
+    this.timer = [0, 0, 0, 0];
   },
   formatAndDisplay: function () {
     // convert the time to mins/secconds
@@ -29,6 +34,26 @@ const Clock = {
     // Display the time
     $("#timeDisplay").text(`${this.mins}:${this.sec}`);
   },
+  timerEdit: function (num) {
+    // Prevent array[2] from going over 5
+    if (this.timer[2] !== 0 && this.timer[1] === 0 && num > 5) {
+      return;
+    } else {
+      if (this.timer[0] === 0) {
+        this.timer.shift();
+        this.timer.push(num.toString());
+      }
+      $("#timeDisplay").text(
+        `${this.timer[0]}${this.timer[1]}:${this.timer[2]}${this.timer[3]}`
+      );
+    }
+  },
+  timerStart: function () {
+    this.mins = this.timer[0] + this.timer[1];
+    this.sec = this.timer[2] + this.timer[3];
+    let minutes = this.mins * 60;
+    this.time = parseInt(minutes) + parseInt(this.sec);
+  },
   updateState: function (param) {
     if (param === "off") {
       this.time = 0;
@@ -41,6 +66,7 @@ const Clock = {
 
 // Countdown timer function :)
 const start = () => {
+  console.log("here");
   let runClock = setInterval(timer, 1000);
 
   function timer() {
@@ -104,6 +130,7 @@ const disable = (btns) => {
   btns.forEach((btn) => $(btn).attr("disabled", "true"));
 };
 
+// TODO: Refactor button handling
 const btnHandler = (param) => {
   switch (param) {
     case "clockStart":
@@ -113,6 +140,10 @@ const btnHandler = (param) => {
     case "clockStop":
       disable(["#start", "#pause", "#0"]);
       enable(["#popcorn", "#potato", "#timer"]);
+      break;
+    case "timerEnabled":
+      enable(["#start", "#pause", "#0"]);
+      disable(["#popcorn", "#potato"]);
       break;
     default:
       return;
@@ -127,11 +158,15 @@ const reset = () => {
 // Element Listeners -------
 $(".num").click(function () {
   let num = parseInt(this.id);
-  if (num !== 30) {
-    num = num * 60;
+  if (Clock.timerIsOn) {
+    Clock.timerEdit(num);
+  } else {
+    if (num !== 30) {
+      num = num * 60;
+    }
+    btnHandler("clockStart");
+    Clock.addTime(num);
   }
-  btnHandler("clockStart");
-  Clock.addTime(num);
 });
 
 $("#popcorn").click(function () {
@@ -148,7 +183,22 @@ $("#potato").click(function () {
   start();
 });
 
+$("#timer").click(function () {
+  if (Clock.timerIsOn) {
+    Clock.clearTimer();
+    Clock.updateState("off");
+    reset();
+  } else {
+    Clock.formatAndDisplay();
+    btnHandler("timerEnabled");
+    Clock.timerIsOn = true;
+  }
+});
+
 $("#start").click(function () {
+  if (Clock.timerIsOn) {
+    Clock.timerStart();
+  }
   btnHandler("clockStart");
   Clock.updateState("running");
   start();
@@ -159,6 +209,7 @@ $("#pause").click(function () {
 });
 
 $("#clear").click(function () {
+  Clock.clearTimer();
   Clock.updateState("off");
   reset();
 });
